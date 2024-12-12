@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="container mt-4">
+    <h2 class="text-white">Lista de Médicos</h2>
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Especialidad</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for medico in medicos %}
+            <tr>
+                <td>{{ medico[0] }}</td>
+                <td>{{ medico[1] }}</td>
+                <td>{{ medico[2] if medico[2] else "Sin Especialidad" }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2 class="text-white mt-5">Lista de Especialidades</h2>
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for especialidad in especialidades %}
+            <tr>
+                <td>{{ especialidad[0] }}</td>
+                <td>{{ especialidad[1] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

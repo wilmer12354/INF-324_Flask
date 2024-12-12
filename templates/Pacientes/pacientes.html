@@ -1,0 +1,81 @@
+{% extends "Pacientes/plantilla_paciente.html" %}
+{% block body %}
+    <div class="container mt-5">
+        <h1 class="mb-4">Lista de Pacientes</h1>
+        <a href="{{ url_for('agregar_paciente') }}" class="btn btn-primary">Agregar Nuevo Paciente</a>
+        <table class="table table-dark table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Fecha de Nacimiento</th>
+                    <th>Teléfono</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for paciente in pacientes %}
+                <tr>
+                    <td>{{ paciente[0] }}</td>
+                    <td>{{ paciente[1] }}</td>
+                    <td>{{ paciente[2] }}</td>
+                    <td>{{ paciente[3] }}</td>
+                    <td>{{ paciente[4] }}</td>
+                    <td>
+                        <a href="{{ url_for('editar_paciente', id=paciente[0]) }}" class="btn btn-warning btn-sm">Editar</a>
+                        <a href="{{ url_for('eliminar_paciente', id=paciente[0]) }}" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar este paciente?');">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="row mt-5">
+            <!-- Tabla de Médicos -->
+            <div class="col-md-6">
+                <h2>Médicos</h2>
+                <table class="table table-dark table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Especialidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for medico in medicos %}
+                        <tr>
+                            <td>{{ medico[0] }}</td>
+                            <td>{{ medico[1] }}</td>
+                            <td>{{ medico[2] if medico[2] else "Sin Especialidad" }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+    
+            <!-- Tabla de Especialidades -->
+            <div class="col-md-6">
+                <h2>Especialidades</h2>
+                <table class="table table-dark table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for especialidad in especialidades %}
+                        <tr>
+                            <td>{{ especialidad[0] }}</td>
+                            <td>{{ especialidad[1] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        
+    </div>
+{% endblock %}

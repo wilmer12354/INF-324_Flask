@@ -1,0 +1,51 @@
+{% extends "Consultas/plantilla_consultas.html" %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1 class="mb-4">Editar Consulta</h1>
+        
+        <form method="POST" class="bg-dark p-4 rounded shadow-lg">
+
+            <div class="mb-3">
+                <label for="paciente_id" class="form-label text-white">Paciente:</label>
+                <select name="paciente_id" class="form-select" required>
+                    {% for paciente in pacientes %}
+                        <option value="{{ paciente[0] }}" 
+                            {% if consulta[1] == paciente[0] %}selected{% endif %}>
+                            {{ paciente[1] }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div class="mb-3">
+                <label for="medico_id" class="form-label text-white">Médico:</label>
+                <select name="medico_id" class="form-select" required>
+                    {% for medico in medicos %}
+                        <option value="{{ medico[0] }}" 
+                            {% if consulta[2] == medico[0] %}selected{% endif %}>
+                            {{ medico[1] }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+
+            <div class="mb-3">
+                <label for="fecha" class="form-label text-white">Fecha:</label>
+                <input type="date" name="fecha" class="form-control" value="{{ consulta[3] }}" required>
+            </div>
+            
+
+            <div class="mb-3">
+                <label for="diagnostico" class="form-label text-white">Diagnóstico:</label>
+                <input type="text" name="diagnostico" class="form-control" value="{{ consulta[4] }}" required>
+            </div>
+
+            <div class="mb-3">
+                <input type="submit" value="Actualizar" class="btn btn-success">
+                <a href="{{ url_for('listar_consultas') }}" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}
